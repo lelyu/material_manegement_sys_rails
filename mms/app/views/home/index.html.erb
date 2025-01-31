@@ -1,2 +1,15 @@
-<h1>Hello World</h1>
-This is my first rails webpage.
+<h1>Welcome to the Materials Management System</h1>
+<p>Managing your resources has never been easier. This system helps instructors and administrators efficiently track materials, ensuring everything is accounted for and accessible when needed.</p>
+
+<h2>Key Features:</h2>
+<ul>
+  <li>📦 Track Materials – Keep an up-to-date inventory of all materials.</li>
+  <li>📍 Location Management – Know exactly where each item is stored.</li>
+  <li>👤 Assign Instructors – Manage who is responsible for each item.</li>
+  <li>📅 Check-in & Check-out System – Log borrowing and returning dates with ease.</li>
+  <li>🔍 Search & Filter – Quickly find materials based on name, location, or availability.</li>
+</ul>
+
+<p>Click below to start managing your materials:</p>
+<%= link_to "View Materials", materials_path, class: "btn btn-primary" %>
+<%= link_to "Add New Material", new_material_path, class: "btn btn-success" %>
