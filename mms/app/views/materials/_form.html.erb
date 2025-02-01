@@ -42,6 +42,12 @@
   </div>
 
   <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id, value: current_user.id, readonly: true %>
+
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
