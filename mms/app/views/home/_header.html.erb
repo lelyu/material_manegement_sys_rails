@@ -13,26 +13,27 @@
         <li class="nav-item">
             <%= link_to 'View Materials', materials_path, class:"nav-link"%>
         </li>
-        <li class="nav-item">
-            <%= link_to 'Add Material', new_material_path, class:"nav-link"%>
-        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+              <%= link_to 'Add Material', new_material_path, class:"nav-link"%>
+          </li>
+        <% end %>
         <%# user auth actions %>
-        <li class="nav-item">
-            <%= link_to 'Sign up', new_user_registration_path, class:"nav-link"%>
-        </li>
-        <li class="nav-item">
-            <%= link_to 'Sign In', new_user_session_path, class:"nav-link"%>
-        </li>
-        <li class="nav-item">
-            <%= button_to 'Sign out', destroy_user_session_path, class:"nav-link", method: :delete%>
-        </li>
-        <li class="nav-item">
-            <%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link"%>
-        </li>
-
-
-        
-        
+        <% if !user_signed_in? %>
+          <li class="nav-item">
+              <%= link_to 'Sign up', new_user_registration_path, class:"nav-link"%>
+          </li>
+          <li class="nav-item">
+              <%= link_to 'Sign In', new_user_session_path, class:"nav-link"%>
+          </li>
+        <% else %>
+          <li class="nav-item">
+              <%= button_to 'Sign out', destroy_user_session_path, class:"nav-link", method: :delete%>
+          </li>
+          <li class="nav-item">
+              <%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link"%>
+          </li>
+        <% end %>   
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
