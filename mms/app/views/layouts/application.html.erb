@@ -20,7 +20,8 @@
   <body>
     <%= render 'home/header'%>
     <div class='container shadow p-3 mb-5 bg-white rounded'>
-      <br>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       <%= yield %>
     </div>
      
