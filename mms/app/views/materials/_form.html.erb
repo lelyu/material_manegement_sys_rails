@@ -41,10 +41,10 @@
     <%= form.date_field :check_out %>
   </div>
 
-  <div>
+  <%# hide uid %>
+  <div style="display: none;">
     <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id, value: current_user.id, readonly: true %>
-
+    <%= form.number_field :user_id, value: current_user.id, readonly: true %>
   </div>
 
   <div>
