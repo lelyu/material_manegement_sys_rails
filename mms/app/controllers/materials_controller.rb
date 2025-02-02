@@ -1,5 +1,6 @@
 class MaterialsController < ApplicationController
   before_action :set_material, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /materials or /materials.json
   def index
@@ -65,6 +66,6 @@ class MaterialsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def material_params
-      params.expect(material: [ :name, :location, :quantity, :instructor, :check_in, :check_out ])
+      params.expect(material: [ :name, :location, :quantity, :instructor, :check_in, :check_out, :user_id ])
     end
 end
