@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  get '/materials/search', to: 'materials#search', as: 'search_materials'
   resources :materials
   # get "home/index"
   get 'home/about'

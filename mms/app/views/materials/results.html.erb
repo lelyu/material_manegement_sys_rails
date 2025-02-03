@@ -1,0 +1,16 @@
+<% content_for :title, "Search Results" %>
+
+<h1>Search Results</h1>
+
+<div id="materials">
+  <% @materials.each do |material| %>
+    <% if material.user == current_user %>
+      <%= render material %>
+      <p>
+        <%= link_to "Show this material", material %>
+      </p>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "Back to Materials", materials_path %>

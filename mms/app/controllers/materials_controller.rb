@@ -3,6 +3,32 @@ class MaterialsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
+
+
+  def search
+    @query = params[:query]
+
+    if @query.present?
+      if ActiveRecord::Base.connection.adapter_name.downcase.start_with?('sqlite')
+        # Use LOWER() for case-insensitive search in SQLite
+        @materials = Material.where(
+          "LOWER(name) LIKE LOWER(?) OR LOWER(location) LIKE LOWER(?) OR LOWER(instructor) LIKE LOWER(?)",
+          "%#{@query}%", "%#{@query}%", "%#{@query}%"
+        )
+      else
+        # Use ILIKE for PostgreSQL
+        @materials = Material.where(
+          "name ILIKE ? OR location ILIKE ? OR instructor ILIKE ?", 
+          "%#{@query}%", "%#{@query}%", "%#{@query}%"
+        )
+      end
+    else
+      @materials = Material.none
+    end
+
+    render :results
+  end
+
   # GET /materials or /materials.json
   def index
     @materials = Material.all
