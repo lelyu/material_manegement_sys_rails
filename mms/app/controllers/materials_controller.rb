@@ -1,6 +1,7 @@
 class MaterialsController < ApplicationController
   before_action :set_material, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /materials or /materials.json
   def index
@@ -13,7 +14,8 @@ class MaterialsController < ApplicationController
 
   # GET /materials/new
   def new
-    @material = Material.new
+    # @material = Material.new
+    @material = current_user.materials.build
   end
 
   # GET /materials/1/edit
@@ -22,8 +24,8 @@ class MaterialsController < ApplicationController
 
   # POST /materials or /materials.json
   def create
-    @material = Material.new(material_params)
-
+    # @material = Material.new(material_params)
+    @material = current_user.materials.build(material_params)
     respond_to do |format|
       if @material.save
         format.html { redirect_to @material, notice: "Material was successfully created." }
@@ -56,6 +58,11 @@ class MaterialsController < ApplicationController
       format.html { redirect_to materials_path, status: :see_other, notice: "Material was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def correct_user
+    @material = current_user.materials.find_by(id: params[:id])
+    redirect_to materials_path, notice: "Not Authorized To Edit This Material" if @material.nil?
   end
 
   private
