@@ -5,10 +5,12 @@
 
 <div id="materials">
   <% @materials.each do |material| %>
-    <%= render material %>
-    <p>
-      <%= link_to "Show this material", material %>
-    </p>
+    <% if material.user == current_user%>
+      <%= render material %>
+      <p>
+        <%= link_to "Show this material", material %>
+      </p>
+    <%end%>
   <% end %>
 </div>
 
